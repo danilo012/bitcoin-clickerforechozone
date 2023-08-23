@@ -119,7 +119,7 @@ var Game = {}
 
 // Every constant variable is saved here
 Game.GameConst = {
-  "priceMultiplier": 0.20,
+  "priceMultiplier": 195,
   "VERSION": "1.4.0"
 }
 
@@ -444,7 +444,7 @@ $(document).ready(function () {
   $(".bitcoin").click(function () {
 
     // Add 1^-8 Bitcoins (equal to 1 satoshi)
-    bitcoins = bitcoins + 0.00000001
+    bitcoins = bitcoins + 0.00000000001
 
     // Show the new number on the page
     if(bitcoins > 1000000){
