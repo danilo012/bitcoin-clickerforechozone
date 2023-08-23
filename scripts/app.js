@@ -101,7 +101,7 @@ if(localStorage.getItem("bitcoins") === null){
   $(".bitcoinAmount").text("loading...")
   $(".satoshiAmount").text("loading...")
 
-  let satoshis = bitcoins * 100000000;
+  let satoshis = bitcoins * 100000000000;
 
 }
 
@@ -244,8 +244,8 @@ Game.setBitcoinPerSecondRateAtBeginning = function () {
       bitcoinRate = bitcoinRate + (itemAmount * bits_per_sec)
 
       // Logging the calculation in the console
-      console.log("i = " + i + " | B/sec before: " + before.toFixed(8) +
-        " - Calculation made: " + before.toFixed(8) + " + (" + itemAmount + " * " + bits_per_sec + ") = " +  bitcoinRate.toFixed(8) +
+      console.log("i = " + i + " | B/sec before: " + before.toFixed(12) +
+        " - Calculation made: " + before.toFixed(8) + " + (" + itemAmount + " * " + bits_per_sec + ") = " +  bitcoinRate.toFixed(12) +
         " | New B/sec at " + bitcoinRate.toFixed(8))
     }
   }
@@ -263,7 +263,7 @@ Game.setBitcoinPerSecondRateAtBeginning = function () {
 Game.setNewBitcoinRate = function (rate) {
 
   // Logging the new Bitcoin per second rate
-  console.log("setNewBitcoinRate -> New rate: " + (bitcoinRate + rate).toFixed(8) )
+  console.log("setNewBitcoinRate -> New rate: " + (bitcoinRate + rate).toFixed(12) )
 
   // Showing the new rate on the page
   // Rounding at specific values
@@ -348,7 +348,7 @@ Game.bSecFunction = function (rate) {
 
 
   // Rounding the satoshis amount at a specific value and optimize it for displaying on the screen.
-  var satoshis = bitcoins * 100000000;
+  var satoshis = bitcoins * 100000000000;
 
   if(satoshis < 1000000) {
     $(".satoshiAmount").text(Math.round(satoshis))
@@ -436,7 +436,7 @@ $(document).ready(function () {
   }else if(bitcoinRate >= 1 ){
     $(".bSecRateNumber").text(bitcoinRate.toFixed(2))
   }else{
-    $(".bSecRateNumber").text(bitcoinRate.toFixed(8))
+    $(".bSecRateNumber").text(bitcoinRate.toFixed(12))
   }
 
 
@@ -457,14 +457,14 @@ $(document).ready(function () {
     }else if(bitcoins >= 1){
       $(".bitcoinAmount").text(bitcoins.toFixed(2))
     }else{
-      $(".bitcoinAmount").text(bitcoins.toFixed(8))
+      $(".bitcoinAmount").text(bitcoins.toFixed(12))
     }
 
-    if((bitcoins * 100000000) < 1000000) {
-      $(".satoshiAmount").text(Math.round((bitcoins * 100000000)))
+    if((bitcoins * 100000000000) < 1000000) {
+      $(".satoshiAmount").text(Math.round((bitcoins * 100000000000)))
     }else{
 
-      let satoshiUnitNumber = (bitcoins * 100000000).optimizeNumber()
+      let satoshiUnitNumber = (bitcoins * 100000000000).optimizeNumber()
       $(".satoshiAmount").text(satoshiUnitNumber)
     }
 
@@ -495,10 +495,10 @@ $(document).ready(function () {
     var priceDisplay = $(this).children()[2]
 
     // If you have enough Bitcoins, it´ll buy one item
-    if(parseFloat(bitcoins.toFixed(8)) >= price){
+    if(parseFloat(bitcoins.toFixed(12)) >= price){
 
       // Substract the price from the current Bitcoin number and set it to the bitcoins variable.
-      bitcoins = parseFloat(bitcoins.toFixed(8)) - price
+      bitcoins = parseFloat(bitcoins.toFixed(12)) - price
 
       // Save the new amount of Bitcoins in the localStorage storage
       localStorage.setItem("bitcoins", "" + bitcoins + "")
@@ -519,15 +519,15 @@ $(document).ready(function () {
       }else if(bitcoins >= 1){
         $(".bitcoinAmount").text(bitcoins.toFixed(2))
       }else{
-        $(".bitcoinAmount").text(bitcoins.toFixed(8))
+        $(".bitcoinAmount").text(bitcoins.toFixed(12))
       }
 
       // Calculation the Satoshi amount
-      if((bitcoins * 100000000) < 1e6) {
-        $(".satoshiAmount").text(Math.round((bitcoins * 100000000)))
+      if((bitcoins * 100000000000) < 1e6) {
+        $(".satoshiAmount").text(Math.round((bitcoins * 100000000000)))
       }else{
 
-        let satoshiUnitNumber = (bitcoins * 100000000).optimizeNumber()
+        let satoshiUnitNumber = (bitcoins * 100000000000).optimizeNumber()
         $(".satoshiAmount").text(satoshiUnitNumber)
 
       }
